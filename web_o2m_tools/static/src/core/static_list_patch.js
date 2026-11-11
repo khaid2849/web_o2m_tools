@@ -1,5 +1,5 @@
 import { toRaw } from "@odoo/owl";
-import { x2ManyCommands } from "@web/core/orm_service";
+import { x2ManyCommands } from "@web/core/orm_plugin";
 import { patch } from "@web/core/utils/patch";
 import { StaticList } from "@web/model/relational_model/static_list";
 

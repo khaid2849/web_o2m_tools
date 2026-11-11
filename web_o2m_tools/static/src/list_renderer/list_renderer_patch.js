@@ -3,6 +3,7 @@ import { browser } from "@web/core/browser/browser";
 import { useService } from "@web/core/utils/hooks";
 import { patch } from "@web/core/utils/patch";
 import { ListRenderer } from "@web/views/list/list_renderer";
+import { render } from "@web/owl2/utils";
 import { getO2mToolsConfig } from "../core/config";
 import { O2mPresetMenu } from "./preset_menu";
 
@@ -44,9 +45,15 @@ patch(ListRenderer.prototype, {
     },
 
     get o2mOptionalColumnNames() {
-        return this.props.archInfo.columns
-            .filter((col) => col.type === "field" && col.optional)
-            .map((col) => col.name);
+        const names = [];
+        for (const col of this.props.archInfo.columns) {
+            if (col.type === "field" && col.optional) {
+                names.push(col.name);
+            } else if (col.type === "column_group") {
+                names.push(...col.fields.filter((f) => f.optional).map((f) => f.name));
+            }
+        }
+        return names;
     },
 
     o2mGetVisibleOptionalColumns() {
@@ -59,7 +66,7 @@ patch(ListRenderer.prototype, {
             this.optionalActiveFields[name] = visible.has(name);
         }
         this.saveOptionalActiveFields();
-        this.render();
+        render(this);
     },
 
     /**

@@ -4,42 +4,42 @@
     <t t-name="web_o2m_tools.O2mPresetMenu">
         <div role="separator" class="dropdown-divider"/>
         <h6 class="dropdown-header">Column presets</h6>
-        <t t-foreach="presets" t-as="preset" t-key="preset.id">
+        <t t-foreach="this.presets" t-as="preset" t-key="preset.id">
             <DropdownItem class="'o_web_o2m_preset'" closingMode="'none'" onSelected="() => this.apply(preset)">
                 <div class="d-flex align-items-center gap-1 w-100">
-                    <i class="fa fa-fw" t-att-class="isCurrent(preset) ? 'fa-check text-primary' : ''" role="img" aria-hidden="true"/>
-                    <span class="o_web_o2m_preset_name text-truncate flex-grow-1" t-esc="preset.name"/>
+                    <i class="oi oi-fw text-primary" t-att-data-icon="this.isCurrent(preset) ? 'check' : ''" role="img" aria-hidden="true"/>
+                    <span class="o_web_o2m_preset_name text-truncate flex-grow-1" t-out="preset.name"/>
                     <span t-if="preset.is_default" class="badge text-bg-light">Default</span>
                     <span class="o_web_o2m_preset_actions d-flex">
                         <button type="button" class="btn btn-link btn-sm p-0 px-1 o_web_o2m_preset_favorite"
-                                t-att-title="preset.is_favorite ? titles.removeFavorite : titles.addFavorite"
+                                t-att-title="preset.is_favorite ? this.titles.removeFavorite : this.titles.addFavorite"
                                 t-on-click.stop="() => this.toggleFavorite(preset)">
-                            <i class="fa" t-att-class="preset.is_favorite ? 'fa-star text-warning' : 'fa-star-o'"/>
+                            <i class="oi" data-icon="star" t-att-class="preset.is_favorite ? 'oi-filled text-warning' : ''"/>
                         </button>
                         <button type="button" class="btn btn-link btn-sm p-0 px-1 o_web_o2m_preset_update"
-                                t-att-title="titles.update"
+                                t-att-title="this.titles.update"
                                 t-on-click.stop="() => this.update(preset)">
-                            <i class="fa fa-floppy-o"/>
+                            <i class="oi" data-icon="save"/>
                         </button>
                         <button type="button" class="btn btn-link btn-sm p-0 px-1 o_web_o2m_preset_default"
-                                t-att-title="preset.is_default ? titles.unsetDefault : titles.setDefault"
+                                t-att-title="preset.is_default ? this.titles.unsetDefault : this.titles.setDefault"
                                 t-on-click.stop="() => this.toggleDefault(preset)">
-                            <i class="fa" t-att-class="preset.is_default ? 'fa-thumb-tack text-primary' : 'fa-thumb-tack text-muted'"/>
+                            <i class="oi" data-icon="push_pin" t-att-class="preset.is_default ? 'oi-filled text-primary' : 'text-muted'"/>
                         </button>
                         <button type="button" class="btn btn-link btn-sm p-0 px-1 o_web_o2m_preset_rename"
-                                t-att-title="titles.rename" t-on-click.stop="() => this.rename(preset)">
-                            <i class="fa fa-pencil"/>
+                                t-att-title="this.titles.rename" t-on-click.stop="() => this.rename(preset)">
+                            <i class="oi" data-icon="edit"/>
                         </button>
                         <button type="button" class="btn btn-link btn-sm p-0 px-1 text-danger o_web_o2m_preset_delete"
-                                t-att-title="titles.delete" t-on-click.stop="() => this.remove(preset)">
-                            <i class="fa fa-trash"/>
+                                t-att-title="this.titles.delete" t-on-click.stop="() => this.remove(preset)">
+                            <i class="oi" data-icon="delete"/>
                         </button>
                     </span>
                 </div>
             </DropdownItem>
         </t>
         <DropdownItem class="'o_web_o2m_preset_save'" onSelected="() => this.saveNew()">
-            <i class="fa fa-fw fa-plus me-1" role="img" aria-hidden="true"/>Save current columns…
+            <i class="oi oi-fw me-1" data-icon="add" role="img" aria-hidden="true"/>Save current columns…
         </DropdownItem>
     </t>
 

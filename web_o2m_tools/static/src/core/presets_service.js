@@ -1,4 +1,4 @@
-import { reactive } from "@odoo/owl";
+import { proxy } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 
 const PRESET_MODEL = "web.o2m.column.preset";
@@ -10,7 +10,7 @@ const PRESET_MODEL = "web.o2m.column.preset";
 export const o2mPresetsService = {
     dependencies: ["orm"],
     start(env, { orm }) {
-        const state = reactive({});
+        const state = proxy({});
         const loading = {};
 
         const keyOf = (model, field) => `${model},${field}`;

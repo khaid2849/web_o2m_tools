@@ -2,7 +2,7 @@
     'name': 'One2many Table Tools: Search, Filters & Column Presets',
     'summary': 'Search and filter the lines of one2many tables inside forms, '
                'and save per-user column presets',
-    'version': '19.0.1.0.0',
+    'version': '20.0.1.0.0',
     'category': 'Productivity',
     'author': 'Gout',
     'maintainer': 'Gout',
@@ -10,8 +10,7 @@
     'images': ['static/description/banner.png'],
     'depends': ['web'],
     'data': [
-        'security/ir.model.access.csv',
-        'security/record_rules.xml',
+        'security/ir.access.csv',
         'views/web_o2m_config_views.xml',
     ],
     'assets': {

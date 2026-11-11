@@ -49,17 +49,17 @@ class WebO2mFilter(models.Model):
             if not vals.get('name') and vals.get('field_id'):
                 vals['name'] = self.env['ir.model.fields'].browse(vals['field_id']).field_description
         records = super().create(vals_list)
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
         return records
 
     def write(self, vals):
         res = super().write(vals)
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
         return res
 
     def unlink(self):
         res = super().unlink()
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
         return res
 
     # -------------------------------------------------------------------------

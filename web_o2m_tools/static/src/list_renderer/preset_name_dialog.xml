@@ -2,19 +2,19 @@
 <templates xml:space="preserve">
 
     <t t-name="web_o2m_tools.O2mPresetNameDialog">
-        <Dialog title="props.title" size="'md'">
+        <Dialog title="this.props.title" size="'md'">
             <div class="mb-3">
                 <label class="form-label" for="o_web_o2m_preset_name">Name</label>
                 <input id="o_web_o2m_preset_name" type="text" class="form-control o_web_o2m_preset_name"
-                       t-ref="autofocus" t-model="state.name" t-on-keydown="onKeydown"/>
+                       t-ref="this.inputRef" t-model="this.name" t-on-keydown="this.onKeydown"/>
             </div>
-            <div t-if="props.showDefault" class="form-check">
-                <input id="o_web_o2m_preset_default" type="checkbox" class="form-check-input" t-model="state.isDefault"/>
+            <div t-if="this.props.showDefault" class="form-check">
+                <input id="o_web_o2m_preset_default" type="checkbox" class="form-check-input" t-model="this.isDefault"/>
                 <label class="form-check-label" for="o_web_o2m_preset_default">Use by default when opening this table</label>
             </div>
             <t t-set-slot="footer">
-                <button class="btn btn-primary" t-att-disabled="!state.name.trim() or state.saving" t-on-click="confirm">Save</button>
-                <button class="btn btn-secondary" t-on-click="props.close">Cancel</button>
+                <button class="btn btn-primary" t-att-disabled="!this.canSave" t-on-click="() => this.confirm()">Save</button>
+                <button class="btn btn-secondary" t-on-click="() => this.props.close()">Cancel</button>
             </t>
         </Dialog>
     </t>

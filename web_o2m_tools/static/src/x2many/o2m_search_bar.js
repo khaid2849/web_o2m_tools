@@ -1,10 +1,11 @@
-import { Component, useEffect, useState } from "@odoo/owl";
+import { Component, proxy, t, toRaw, useProps } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { CheckBox } from "@web/core/checkbox/checkbox";
 import { Dropdown } from "@web/core/dropdown/dropdown";
 import { DropdownItem } from "@web/core/dropdown/dropdown_item";
 import { useService } from "@web/core/utils/hooks";
 import { useDebounced } from "@web/core/utils/timing";
+import { useLayoutEffect } from "@web/owl2/utils";
 import { getFilterState, isFilterStateActive } from "./filter_state";
 
 /**
@@ -15,27 +16,27 @@ import { getFilterState, isFilterStateActive } from "./filter_state";
 export class O2mSearchBar extends Component {
     static template = "web_o2m_tools.O2mSearchBar";
     static components = { CheckBox, Dropdown, DropdownItem };
-    static props = {
-        record: Object,
-        name: String,
-        config: Object,
-    };
+    props = useProps({
+        record: t.object(),
+        name: t.string(),
+        config: t.object(),
+    });
 
     setup() {
         this.orm = useService("orm");
-        this.state = useState(getFilterState(this.props.record, this.props.name));
-        this.ui = useState({ searchInput: this.state.search, facets: null, facetsError: false });
+        this.state = getFilterState(this.props.record, this.props.name);
+        this.ui = proxy({ searchInput: this.state.search, facets: null, facetsError: false });
         this.token = 0;
         this.pendingList = null;
         this.debouncedSearch = useDebounced(() => this.commitSearch(), 400);
 
         // Re-apply the filter when Odoo rebuilds the list (after save) or drops
         // it (discard), so it survives these operations.
-        useEffect(
+        useLayoutEffect(
             () => {
                 this.ensureApplied();
             },
-            () => [this.list, this.list.o2mIsFiltered, this.props.record.resId]
+            () => [toRaw(this.list), this.list.o2mIsFiltered, this.props.record.resId]
         );
     }
 
@@ -78,7 +79,7 @@ export class O2mSearchBar extends Component {
             this.isActive &&
             !list.o2mIsFiltered &&
             !this.props.record.isNew &&
-            this.pendingList !== list
+            this.pendingList !== toRaw(list)
         ) {
             await this.apply();
         }
@@ -87,8 +88,9 @@ export class O2mSearchBar extends Component {
     async apply() {
         const record = this.props.record;
         const list = this.list;
+        const rawList = toRaw(list);
         const token = ++this.token;
-        this.pendingList = list;
+        this.pendingList = rawList;
         try {
             if (!this.isActive || record.isNew) {
                 this.state.lastIds = null;
@@ -110,7 +112,7 @@ export class O2mSearchBar extends Component {
                 await list.o2mSetFilter(this.state.lastIds);
             }
             const { ids } = await searchPromise;
-            if (token !== this.token || this.list !== list) {
+            if (token !== this.token || toRaw(this.list) !== rawList) {
                 return; // outdated: a newer request or a new list took over
             }
             if (await list.leaveEditMode()) {
@@ -118,7 +120,7 @@ export class O2mSearchBar extends Component {
                 await list.o2mSetFilter(ids);
             }
         } finally {
-            if (this.pendingList === list) {
+            if (this.pendingList === rawList) {
                 this.pendingList = null;
             }
         }

@@ -1,0 +1,9 @@
+id,name,model_id,group_id/id,operation,domain
+access_web_o2m_config_user,web.o2m.config.user,web.o2m.config,base.group_user,r,
+access_web_o2m_config_system,web.o2m.config.system,web.o2m.config,base.group_system,crud,
+access_web_o2m_filter_user,web.o2m.filter.user,web.o2m.filter,base.group_user,r,
+access_web_o2m_filter_system,web.o2m.filter.system,web.o2m.filter,base.group_system,crud,
+access_web_o2m_filter_option_user,web.o2m.filter.option.user,web.o2m.filter.option,base.group_user,r,
+access_web_o2m_filter_option_system,web.o2m.filter.option.system,web.o2m.filter.option,base.group_system,crud,
+access_web_o2m_column_preset_user,web.o2m.column.preset.user,web.o2m.column.preset,base.group_user,crud,
+rule_web_o2m_column_preset_own,Column presets: own presets only,web.o2m.column.preset,,crud,"[('user_id', '=', user.id)]"

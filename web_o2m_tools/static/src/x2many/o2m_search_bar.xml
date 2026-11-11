@@ -3,39 +3,39 @@
 
     <t t-name="web_o2m_tools.O2mSearchBar">
         <div class="o_web_o2m_search d-flex flex-wrap align-items-center gap-2 me-auto d-print-none"
-             t-att-class="{'o_web_o2m_locked': locked, 'o_web_o2m_filtered': list.o2mIsFiltered}"
-             t-att-data-tooltip="locked ? lockedTooltip : false">
-            <div t-if="props.config.search" class="o_web_o2m_search_input input-group input-group-sm">
-                <span class="input-group-text"><i class="oi oi-search" role="img" aria-hidden="true"/></span>
+             t-att-class="{'o_web_o2m_locked': this.locked, 'o_web_o2m_filtered': this.list.o2mIsFiltered}"
+             t-att-data-tooltip="this.locked ? this.lockedTooltip : false">
+            <div t-if="this.props.config.search" class="o_web_o2m_search_input input-group input-group-sm">
+                <span class="input-group-text"><i class="oi" data-icon="search" role="img" aria-hidden="true"/></span>
                 <input type="search"
                        class="form-control"
-                       t-att-placeholder="placeholder"
-                       t-att-aria-label="placeholder"
-                       t-att-disabled="locked"
-                       t-att-value="ui.searchInput"
-                       t-on-input="onSearchInput"
-                       t-on-keydown="onSearchKeydown"/>
+                       t-att-placeholder="this.placeholder"
+                       t-att-aria-label="this.placeholder"
+                       t-att-disabled="this.locked"
+                       t-att-value="this.ui.searchInput"
+                       t-on-input="this.onSearchInput"
+                       t-on-keydown="this.onSearchKeydown"/>
             </div>
-            <Dropdown t-if="props.config.filter" beforeOpen.bind="loadFacets" disabled="locked"
+            <Dropdown t-if="this.props.config.filter" beforeOpen.bind="this.loadFacets" disabled="this.locked"
                       menuClass="'o_web_o2m_filter_menu'">
-                <button class="o_web_o2m_filter_toggle btn btn-sm btn-secondary" t-att-disabled="locked">
-                    <i class="fa fa-filter me-1" role="img" aria-hidden="true"/>Filters
-                    <span t-if="selectedCount" class="badge rounded-pill text-bg-primary ms-1" t-esc="selectedCount"/>
+                <button class="o_web_o2m_filter_toggle btn btn-sm btn-secondary" t-att-disabled="this.locked">
+                    <i class="oi me-1" data-icon="filter_alt" role="img" aria-hidden="true"/>Filters
+                    <span t-if="this.selectedCount" class="badge rounded-pill text-bg-primary ms-1" t-out="this.selectedCount"/>
                 </button>
                 <t t-set-slot="content">
-                    <div t-if="ui.facetsError" class="dropdown-item-text text-danger">Could not load the filters.</div>
-                    <div t-elif="ui.facets and !ui.facets.length" class="dropdown-item-text text-muted">No filter configured.</div>
-                    <t t-foreach="ui.facets or []" t-as="group" t-key="group.id">
+                    <div t-if="this.ui.facetsError" class="dropdown-item-text text-danger">Could not load the filters.</div>
+                    <div t-elif="this.ui.facets and !this.ui.facets.length" class="dropdown-item-text text-muted">No filter configured.</div>
+                    <t t-foreach="this.ui.facets or []" t-as="group" t-key="group.id">
                         <div t-if="!group_first" role="separator" class="dropdown-divider"/>
-                        <h6 class="dropdown-header" t-esc="group.name"/>
+                        <h6 class="dropdown-header" t-out="group.name"/>
                         <div t-if="!group.options.length" class="dropdown-item-text text-muted small">No value</div>
                         <t t-foreach="group.options" t-as="option" t-key="option_index">
                             <DropdownItem closingMode="'none'" onSelected="() => this.toggleOption(group.id, option.key)">
-                                <CheckBox value="isSelected(group.id, option.key)"
+                                <CheckBox value="this.isSelected(group.id, option.key)"
                                           onChange="() => this.toggleOption(group.id, option.key)">
                                     <span class="d-flex align-items-center w-100">
-                                        <span class="text-truncate flex-grow-1" t-esc="option.label"/>
-                                        <span class="ms-3 text-muted" t-esc="option.count"/>
+                                        <span class="text-truncate flex-grow-1" t-out="option.label"/>
+                                        <span class="ms-3 text-muted" t-out="option.count"/>
                                     </span>
                                 </CheckBox>
                             </DropdownItem>
@@ -43,9 +43,9 @@
                     </t>
                 </t>
             </Dropdown>
-            <span t-if="list.o2mIsFiltered" class="o_web_o2m_count text-muted small" t-esc="countLabel"/>
-            <button t-if="isActive" type="button" class="o_web_o2m_clear btn btn-sm btn-link px-1" t-on-click="clear">
-                <i class="fa fa-times me-1" role="img" aria-hidden="true"/>Clear filters
+            <span t-if="this.list.o2mIsFiltered" class="o_web_o2m_count text-muted small" t-out="this.countLabel"/>
+            <button t-if="this.isActive" type="button" class="o_web_o2m_clear btn btn-sm btn-link px-1" t-on-click="() => this.clear()">
+                <i class="oi me-1" data-icon="close" role="img" aria-hidden="true"/>Clear filters
             </button>
         </div>
     </t>

@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models, tools
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Domain
 
@@ -78,17 +78,17 @@ class WebO2mConfig(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
         return records
 
     def write(self, vals):
         res = super().write(vals)
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
         return res
 
     def unlink(self):
         res = super().unlink()
-        self.env.registry.clear_cache()
+        self.env.transaction.invalidate_ormcache()
         return res
 
     # -------------------------------------------------------------------------
@@ -104,7 +104,7 @@ class WebO2mConfig(models.Model):
         """
         return self.sudo()._get_client_configs()
 
-    @tools.ormcache()
+    @api.ormcache()
     def _get_client_configs(self):
         result = {}
         for config in self.search([]):

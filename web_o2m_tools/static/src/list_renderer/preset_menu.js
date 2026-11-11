@@ -1,4 +1,4 @@
-import { Component, useState } from "@odoo/owl";
+import { Component, t, useProps } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 import { DropdownItem } from "@web/core/dropdown/dropdown_item";
@@ -11,18 +11,17 @@ import { O2mPresetNameDialog } from "./preset_name_dialog";
 export class O2mPresetMenu extends Component {
     static template = "web_o2m_tools.O2mPresetMenu";
     static components = { DropdownItem };
-    static props = {
-        model: String,
-        field: String,
+    props = useProps({
+        model: t.string(),
+        field: t.string(),
         /** () => string[]: optional columns currently displayed */
-        getColumns: Function,
+        getColumns: t.function(),
         /** (string[]) => void */
-        applyColumns: Function,
-    };
+        applyColumns: t.function(),
+    });
 
     setup() {
         this.presetsService = useService("web_o2m_tools.presets");
-        this.presetsState = useState(this.presetsService.state);
         this.dialog = useService("dialog");
         this.notification = useService("notification");
         this.titles = {
@@ -37,7 +36,7 @@ export class O2mPresetMenu extends Component {
     }
 
     get presets() {
-        return this.presetsState[this.presetsService.keyOf(this.props.model, this.props.field)] || [];
+        return this.presetsService.get(this.props.model, this.props.field);
     }
 
     isCurrent(preset) {

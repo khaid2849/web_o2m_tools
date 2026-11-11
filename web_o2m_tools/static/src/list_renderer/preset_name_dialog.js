@@ -1,21 +1,29 @@
-import { Component, useState } from "@odoo/owl";
+import { Component, signal, t, useProps } from "@odoo/owl";
 import { Dialog } from "@web/core/dialog/dialog";
 import { useAutofocus } from "@web/core/utils/hooks";
 
 export class O2mPresetNameDialog extends Component {
     static template = "web_o2m_tools.O2mPresetNameDialog";
     static components = { Dialog };
-    static props = {
-        title: String,
-        name: { type: String, optional: true },
-        showDefault: { type: Boolean, optional: true },
-        onConfirm: Function,
-        close: Function,
-    };
+    props = useProps({
+        title: t.string(),
+        name: t.string().optional(""),
+        showDefault: t.boolean().optional(false),
+        onConfirm: t.function(),
+        close: t.function(),
+    });
+
+    inputRef = signal.ref();
+    name = signal(this.props.name, { type: t.string() });
+    isDefault = signal(false, { type: t.boolean() });
+    saving = signal(false);
 
     setup() {
-        this.state = useState({ name: this.props.name || "", isDefault: false, saving: false });
-        useAutofocus();
+        useAutofocus({ ref: this.inputRef });
+    }
+
+    get canSave() {
+        return Boolean(this.name().trim()) && !this.saving();
     }
 
     onKeydown(ev) {
@@ -26,16 +34,15 @@ export class O2mPresetNameDialog extends Component {
     }
 
     async confirm() {
-        const name = this.state.name.trim();
-        if (!name || this.state.saving) {
+        if (!this.canSave) {
             return;
         }
-        this.state.saving = true;
+        this.saving.set(true);
         try {
-            await this.props.onConfirm({ name, isDefault: this.state.isDefault });
+            await this.props.onConfirm({ name: this.name().trim(), isDefault: this.isDefault() });
             this.props.close();
         } finally {
-            this.state.saving = false;
+            this.saving.set(false);
         }
     }
 }

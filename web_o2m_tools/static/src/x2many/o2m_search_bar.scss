@@ -16,3 +16,10 @@
 .o_x2m_control_panel:has(.o_web_o2m_filtered) ~ .o_list_renderer .o_list_section_options > * {
     visibility: hidden;
 }
+
+// Some modules (e.g. sale) display the x2many control panel below the records:
+// keep it above the table, with its native spacing, when it holds the search bar.
+.o_field_x2many > .o_x2m_control_panel:has(> .o_web_o2m_search) {
+    order: 0 !important;
+    margin-bottom: 1.5rem !important;
+}

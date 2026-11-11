@@ -1,4 +1,4 @@
-import { reactive, toRaw } from "@odoo/owl";
+import { proxy, toRaw } from "@odoo/owl";
 
 /**
  * Search/filter state of the tables, attached to the parent Record.
@@ -17,7 +17,7 @@ export function getFilterState(record, fieldName) {
         statesByRecord.set(rawRecord, byField);
     }
     if (!byField[fieldName]) {
-        byField[fieldName] = reactive({ search: "", selection: {}, lastIds: null });
+        byField[fieldName] = proxy({ search: "", selection: {}, lastIds: null });
     }
     return byField[fieldName];
 }
