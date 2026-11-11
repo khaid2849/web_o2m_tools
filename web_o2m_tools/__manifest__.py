@@ -6,7 +6,6 @@
     'category': 'Productivity',
     'author': 'Gout',
     'maintainer': 'Gout',
-    'website': 'https://github.com/khaid2849/web_o2m_tools',
     'license': 'LGPL-3',
     'images': ['static/description/banner.png'],
     'depends': ['web'],
