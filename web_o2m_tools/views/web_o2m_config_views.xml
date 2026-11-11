@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="web_o2m_config_view_list" model="ir.ui.view">
+        <field name="name">web.o2m.config.list</field>
+        <field name="model">web.o2m.config</field>
+        <field name="arch" type="xml">
+            <list string="One2many Tables">
+                <field name="model_id"/>
+                <field name="field_id"/>
+                <field name="comodel" optional="hide"/>
+                <field name="enable_search" widget="boolean_toggle"/>
+                <field name="enable_filter" widget="boolean_toggle"/>
+                <field name="enable_column_preset" widget="boolean_toggle"/>
+                <field name="active" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="web_o2m_config_view_form" model="ir.ui.view">
+        <field name="name">web.o2m.config.form</field>
+        <field name="model">web.o2m.config</field>
+        <field name="arch" type="xml">
+            <form string="One2many Table">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <group>
+                            <field name="model_id" options="{'no_create': True}"/>
+                            <field name="field_id" options="{'no_create': True}" readonly="not model_id"/>
+                            <field name="comodel"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="enable_search"/>
+                            <field name="enable_filter"/>
+                            <field name="enable_column_preset"/>
+                        </group>
+                    </group>
+                    <notebook invisible="not field_id">
+                        <page string="Search" name="search" invisible="not enable_search">
+                            <p class="text-muted">
+                                The search box matches a line when any of these fields contains the typed text.
+                            </p>
+                            <field name="search_field_ids" options="{'no_create': True}">
+                                <list>
+                                    <field name="field_description"/>
+                                    <field name="name"/>
+                                    <field name="ttype"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Filters" name="filters" invisible="not enable_filter">
+                            <p class="text-muted">
+                                Options of one group are combined with OR, groups are combined with AND.
+                            </p>
+                            <field name="filter_ids" context="{'default_config_id': id}">
+                                <list>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="filter_type"/>
+                                    <field name="field_id"/>
+                                    <field name="option_ids" widget="many2many_tags" string="Conditions"/>
+                                </list>
+                                <form string="Filter Group">
+                                    <group>
+                                        <field name="comodel" invisible="1"/>
+                                        <field name="filter_type" widget="radio"/>
+                                        <field name="field_id" options="{'no_create': True}"
+                                               invisible="filter_type != 'field'"
+                                               required="filter_type == 'field'"/>
+                                        <field name="name"/>
+                                    </group>
+                                    <field name="option_ids" invisible="filter_type != 'domain'">
+                                        <list editable="bottom">
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="comodel" column_invisible="True"/>
+                                            <field name="name"/>
+                                            <field name="domain" widget="domain" options="{'model': 'comodel'}"/>
+                                        </list>
+                                    </field>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Column Presets" name="presets" invisible="not enable_column_preset">
+                            <p class="text-muted">
+                                Users can save, rename, delete and set a default set of visible columns
+                                from the ⚙ menu of the table. Only optional columns are part of a preset.
+                            </p>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="web_o2m_config_view_search" model="ir.ui.view">
+        <field name="name">web.o2m.config.search</field>
+        <field name="model">web.o2m.config</field>
+        <field name="arch" type="xml">
+            <search string="One2many Tables">
+                <field name="model_id"/>
+                <field name="field_id"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="web_o2m_config_action" model="ir.actions.act_window">
+        <field name="name">One2many Tables</field>
+        <field name="res_model">web.o2m.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Enable search, filters and column presets on a table</p>
+            <p>Pick a model and one of its one2many fields. Only the tables listed here get the tools;
+                users must reload the page after a change.</p>
+        </field>
+    </record>
+
+    <menuitem id="web_o2m_config_menu"
+              name="One2many Tables"
+              parent="base.menu_administration"
+              action="web_o2m_config_action"
+              groups="base.group_system"
+              sequence="90"/>
+</odoo>

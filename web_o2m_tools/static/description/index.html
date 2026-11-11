@@ -1,0 +1,115 @@
+<section class="oe_container" style="padding: 24px 16px;">
+    <div class="oe_row" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+        <h2 style="color: #14566E; font-weight: 700; margin-bottom: 8px;">One2many Table Tools</h2>
+        <h4 style="color: #555; font-weight: 400; margin-bottom: 24px;">
+            Search, filter and choose columns in the line tables of your forms
+        </h4>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">
+            Long order lines, invoice lines, bills of materials or any other one2many table become hard to work with
+            when they hold dozens or hundreds of rows. This module adds a search box, a multi-criteria filter
+            panel and per-user column presets to the one2many tables <b>you choose</b>, without changing any data.
+        </p>
+    </div>
+</section>
+
+<section class="oe_container" style="padding: 24px 16px; background: #F4F9F9;">
+    <div class="oe_row" style="max-width: 1000px; margin: 0 auto;">
+        <h3 style="color: #14566E; font-weight: 700; text-align: center; margin-bottom: 24px;">Key features</h3>
+        <div class="row">
+            <div class="col-md-4" style="margin-bottom: 16px;">
+                <h5 style="color: #1F8A8A; font-weight: 700;">Search all lines</h5>
+                <p style="color: #333;">
+                    Type a keyword to search the configured fields over <b>all</b> lines of the record, not only the
+                    current page. Press Enter to apply now, Escape to clear.
+                </p>
+            </div>
+            <div class="col-md-4" style="margin-bottom: 16px;">
+                <h5 style="color: #1F8A8A; font-weight: 700;">Filter with counts</h5>
+                <p style="color: #333;">
+                    Filter groups built from the data itself (char, selection, many2one, boolean fields), each value
+                    with its number of lines, plus named conditions such as <code>&gt; 30</code> defined with a domain.
+                    Computed and related fields are supported.
+                </p>
+            </div>
+            <div class="col-md-4" style="margin-bottom: 16px;">
+                <h5 style="color: #1F8A8A; font-weight: 700;">Column presets per user</h5>
+                <p style="color: #333;">
+                    Save the visible optional columns under a name, then apply, update, rename, delete or star them.
+                    A preset marked as default is applied every time the table opens, on any browser.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container" style="padding: 24px 16px;">
+    <div class="oe_row" style="max-width: 1000px; margin: 0 auto;">
+        <h3 style="color: #14566E; font-weight: 700; text-align: center;">Search and filter the lines</h3>
+        <p style="text-align: center; color: #555;">
+            The counter shows how many lines match. Filters stay applied when you change page, sort, switch tab or
+            save the record.
+        </p>
+        <div style="text-align: center; margin: 16px 0;">
+            <img src="screenshot_search_filter.png" alt="Search and filter the lines of a sales order"
+                 class="img img-fluid" style="border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.08);"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container" style="padding: 24px 16px; background: #F4F9F9;">
+    <div class="oe_row" style="max-width: 1000px; margin: 0 auto;">
+        <h3 style="color: #14566E; font-weight: 700; text-align: center;">Save your favourite columns</h3>
+        <p style="text-align: center; color: #555;">
+            Presets live in the usual optional columns menu. They are stored per user account and never affect other
+            users.
+        </p>
+        <div style="text-align: center; margin: 16px 0;">
+            <img src="screenshot_column_presets.png" alt="Column presets in the optional columns menu"
+                 class="img img-fluid" style="border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.08);"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container" style="padding: 24px 16px;">
+    <div class="oe_row" style="max-width: 1000px; margin: 0 auto;">
+        <h3 style="color: #14566E; font-weight: 700; text-align: center;">Enable it only where you need it</h3>
+        <p style="text-align: center; color: #555;">
+            Go to <b>Settings &rarr; One2many Tables</b>, pick a model and one of its one2many fields, then choose the
+            searched fields, the filter groups and whether column presets are allowed. Tables that are not configured
+            keep the standard Odoo behaviour. No code or XML is needed.
+        </p>
+        <div style="text-align: center; margin: 16px 0;">
+            <img src="screenshot_configuration.png" alt="Configuration of a one2many table"
+                 class="img img-fluid" style="border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,.08);"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container" style="padding: 24px 16px; background: #F4F9F9;">
+    <div class="oe_row" style="max-width: 1000px; margin: 0 auto;">
+        <h3 style="color: #14566E; font-weight: 700; text-align: center; margin-bottom: 16px;">Good to know</h3>
+        <ul style="color: #333; line-height: 1.8;">
+            <li>Works on any one2many field, including tables with a custom widget (sales and invoice lines with
+                sections and notes).</li>
+            <li>Display only: no data is changed, no record is created, and existing features such as Export keep
+                working as before.</li>
+            <li>Access rights and record rules are respected: users only search lines they are allowed to read.</li>
+            <li>Search and filters are locked while the form has unsaved changes, and are not available on new
+                records. Save first, then filter.</li>
+            <li>Drag and drop reordering is disabled while a filter is active, so the line order stays correct.</li>
+            <li>List view only (not the kanban view used for one2many tables on mobile).</li>
+            <li>After changing a configuration, users need to reload the page.</li>
+            <li>Depends only on <code>web</code>. English and Vietnamese translations included.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="oe_container" style="padding: 24px 16px;">
+    <div class="oe_row" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+        <h3 style="color: #14566E; font-weight: 700;">Support</h3>
+        <p style="color: #555;">
+            Questions and bug reports:
+            <a href="https://github.com/khaid2849/web_o2m_tools/issues" target="_blank">GitHub issues</a>.
+        </p>
+    </div>
+</section>

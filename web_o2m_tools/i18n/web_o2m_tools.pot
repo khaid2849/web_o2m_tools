@@ -1,0 +1,538 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* web_o2m_tools
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-11 08:12+0000\n"
+"PO-Revision-Date: 2026-11-11 08:12+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_config.py:0
+msgid "\"%s\" is not a one2many field of the selected model."
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.js:0
+msgid "%(visible)s / %(total)s lines"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_filter.py:0
+msgid "(Empty)"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_filter_option.py:0
+msgid "A domain must be a list."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__active
+msgid "Active"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Add to favorites"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_search
+msgid "Archived"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_name_dialog.xml:0
+msgid "Cancel"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.xml:0
+msgid "Clear filters"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__enable_column_preset
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid "Column Presets"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Column preset “%s” saved"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Column preset “%s” updated"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.xml:0
+msgid "Column presets"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__column_names
+msgid "Columns"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,help:web_o2m_tools.field_web_o2m_column_preset__column_names
+msgid "Comma separated names of the optional columns to display."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__option_ids
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid "Conditions"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__config_id
+msgid "Config"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.xml:0
+msgid "Could not load the filters."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__create_uid
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__create_uid
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__create_uid
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__create_date
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__create_date
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__create_date
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.xml:0
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__is_default
+msgid "Default"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Delete"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Delete column preset"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Delete the column preset “%s”?"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__display_name
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__display_name
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__display_name
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__domain
+msgid "Domain"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.actions.act_window,help:web_o2m_tools.web_o2m_config_action
+msgid "Enable search, filters and column presets on a table"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__is_favorite
+msgid "Favorite"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__field_id
+msgid "Field"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_filter.py:0
+msgid "Field \"%s\" cannot be used as a filter of this table."
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_config.py:0
+msgid "Field \"%s\" cannot be used for searching this table."
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_config.py:0
+msgid "Field \"%s\" is not searchable in the database."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__field_name
+msgid "Field Name"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__filter_id
+msgid "Filter"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid "Filter Group"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__filter_ids
+msgid "Filter Groups"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_filter.py:0
+msgid "Filter group \"%s\" needs a field."
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.xml:0
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__enable_filter
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid "Filters"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,help:web_o2m_tools.field_web_o2m_config__comodel
+#: model:ir.model.fields,help:web_o2m_tools.field_web_o2m_filter__comodel
+#: model:ir.model.fields,help:web_o2m_tools.field_web_o2m_filter_option__comodel
+msgid "For relationship fields, the technical name of the target model"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model,name:web_o2m_tools.model_ir_http
+msgid "HTTP Routing"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__id
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__id
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__id
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__id
+msgid "ID"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_filter_option.py:0
+msgid "Invalid domain for condition \"%(name)s\": %(error)s"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__name
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__name
+msgid "Label"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__write_uid
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__write_uid
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__write_uid
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__write_date
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__write_date
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__write_date
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__comodel
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__comodel
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__comodel
+msgid "Line Model"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__res_model
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__model_id
+msgid "Model"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__model
+msgid "Model Name"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_name_dialog.xml:0
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__name
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__name
+msgid "Name"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields.selection,name:web_o2m_tools.selection__web_o2m_filter__filter_type__domain
+msgid "Named conditions"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_filter.py:0
+msgid "No"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.xml:0
+msgid "No filter configured."
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.xml:0
+msgid "No value"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__field_name
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__field_id
+msgid "One2many Field"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid "One2many Table"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model,name:web_o2m_tools.model_web_o2m_column_preset
+msgid "One2many Table Column Preset"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model,name:web_o2m_tools.model_web_o2m_filter_option
+msgid "One2many Table Filter Condition"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model,name:web_o2m_tools.model_web_o2m_filter
+msgid "One2many Table Filter Group"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model,name:web_o2m_tools.model_web_o2m_config
+msgid "One2many Table Tools Configuration"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.actions.act_window,name:web_o2m_tools.web_o2m_config_action
+#: model:ir.ui.menu,name:web_o2m_tools.web_o2m_config_menu
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_list
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_search
+msgid "One2many Tables"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid ""
+"Options of one group are combined with OR, groups are combined with AND."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.actions.act_window,help:web_o2m_tools.web_o2m_config_action
+msgid ""
+"Pick a model and one of its one2many fields. Only the tables listed here get the tools;\n"
+"                users must reload the page after a change."
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Remove from favorites"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Rename"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Rename column preset"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_name_dialog.xml:0
+msgid "Save"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Save current columns"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.xml:0
+msgid "Save current columns…"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.js:0
+msgid "Save the record to search or filter its lines"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__enable_search
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid "Search"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_config.py:0
+msgid "Search and filters are not enabled for this table."
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.js:0
+msgid "Search lines…"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/x2many/o2m_search_bar.js:0
+msgid "Search: %s"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_config__search_field_ids
+msgid "Searched Fields"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__sequence
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__sequence
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter_option__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Stop using by default"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_config.py:0
+msgid "The record does not exist anymore."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid ""
+"The search box matches a line when any of these fields contains the typed "
+"text."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.constraint,message:web_o2m_tools.constraint_web_o2m_config_field_uniq
+msgid "This one2many field is already configured."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_filter__filter_type
+msgid "Type"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Update with the current columns"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_menu.js:0
+msgid "Use by default"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-javascript
+#: code:addons/web_o2m_tools/static/src/list_renderer/preset_name_dialog.xml:0
+msgid "Use by default when opening this table"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields,field_description:web_o2m_tools.field_web_o2m_column_preset__user_id
+msgid "User"
+msgstr ""
+
+#. module: web_o2m_tools
+#: model_terms:ir.ui.view,arch_db:web_o2m_tools.web_o2m_config_view_form
+msgid ""
+"Users can save, rename, delete and set a default set of visible columns\n"
+"                                from the ⚙ menu of the table. Only optional columns are part of a preset."
+msgstr ""
+
+#. module: web_o2m_tools
+#: model:ir.model.fields.selection,name:web_o2m_tools.selection__web_o2m_filter__filter_type__field
+msgid "Values of a field"
+msgstr ""
+
+#. module: web_o2m_tools
+#. odoo-python
+#: code:addons/web_o2m_tools/models/web_o2m_filter.py:0
+msgid "Yes"
+msgstr ""

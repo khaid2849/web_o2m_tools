@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="web.X2ManyField" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_x2m_control_panel')]/*[1]" position="before">
+            <t t-if="o2mShowSearchBar"
+               t-component="o2mSearchBarComponent"
+               record="props.record"
+               name="props.name"
+               config="o2mToolsConfig"/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_cp_pager')]" position="attributes">
+            <attribute name="t-if">o2mShowPager</attribute>
+        </xpath>
+    </t>
+
+</templates>
