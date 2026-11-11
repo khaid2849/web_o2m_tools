@@ -2,7 +2,7 @@
     'name': 'One2many Table Tools: Search, Filters & Column Presets',
     'summary': 'Search and filter the lines of one2many tables inside forms, '
                'and save per-user column presets',
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'category': 'Productivity',
     'author': 'Gout',
     'maintainer': 'Gout',

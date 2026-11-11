@@ -3,7 +3,7 @@
 
     <t t-name="web_o2m_tools.O2mSearchBar">
         <div class="o_web_o2m_search d-flex flex-wrap align-items-center gap-2 me-auto d-print-none"
-             t-att-class="{'o_web_o2m_locked': locked}"
+             t-att-class="{'o_web_o2m_locked': locked, 'o_web_o2m_filtered': list.o2mIsFiltered}"
              t-att-data-tooltip="locked ? lockedTooltip : false">
             <div t-if="props.config.search" class="o_web_o2m_search_input input-group input-group-sm">
                 <span class="input-group-text"><i class="oi oi-search" role="img" aria-hidden="true"/></span>

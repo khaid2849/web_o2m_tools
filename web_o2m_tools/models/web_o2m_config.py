@@ -1,6 +1,6 @@
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 SEARCH_FIELD_TYPES = ('char', 'text', 'html', 'many2one', 'selection')
 FILTER_FIELD_TYPES = ('char', 'selection', 'many2one', 'boolean')
@@ -35,9 +35,7 @@ class WebO2mConfig(models.Model):
     filter_ids = fields.One2many('web.o2m.filter', 'config_id', string='Filter Groups', copy=True)
     enable_column_preset = fields.Boolean(string='Column Presets', default=True)
 
-    _sql_constraints = [
-        ('field_uniq', 'unique(field_id)', 'This one2many field is already configured.'),
-    ]
+    _field_uniq = models.Constraint('unique(field_id)', 'This one2many field is already configured.')
 
     @api.depends('model_id.name', 'field_id.field_description')
     def _compute_name(self):
@@ -136,14 +134,12 @@ class WebO2mConfig(models.Model):
         :param filters: ``{filter_id (str|int): [option keys]}``
         """
         config, lines = self._o2m_get_lines(model, res_id, field_name)
-        domain = [('id', 'in', lines.ids)]
+        domain = Domain('id', 'in', lines.ids)
         python_checks = []
 
         search = (search or '').strip()
         if search and config.enable_search and config.search_field_ids:
-            domain = expression.AND([domain, expression.OR([
-                [(field.name, 'ilike', search)] for field in config.search_field_ids
-            ])])
+            domain &= Domain.OR(Domain(field.name, 'ilike', search) for field in config.search_field_ids)
 
         if config.enable_filter:
             for filter_id, keys in (filters or {}).items():
@@ -152,7 +148,7 @@ class WebO2mConfig(models.Model):
                     continue
                 group_domain, python_check = group._get_selection_domain(keys)
                 if group_domain is not None:
-                    domain = expression.AND([domain, group_domain])
+                    domain &= group_domain
                 if python_check:
                     python_checks.append(python_check)
 

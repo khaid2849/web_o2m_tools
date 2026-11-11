@@ -1,11 +1,11 @@
-# One2many Table Tools (Odoo 18)
+# One2many Table Tools (Odoo 19)
 
 Search, filter and choose columns in the one2many tables of your forms: sales order lines,
 invoice lines, or any other line table. You choose which tables get these tools.
 
 | Module | Version | Description |
 |---|---|---|
-| [web_o2m_tools](web_o2m_tools) | 18.0.1.0.0 | Search and filter one2many lines, save per-user column presets |
+| [web_o2m_tools](web_o2m_tools) | 19.0.1.0.0 | Search and filter one2many lines, save per-user column presets |
 
 ## Features
 
@@ -30,7 +30,8 @@ Users need to reload the page after a configuration change.
 ## Limitations
 
 - Search and filters are locked while the form has unsaved changes, and are hidden on new records.
-- Drag and drop reordering is disabled while a filter is active.
+- Drag and drop reordering and the section actions of sales and invoice lines (add a line in a
+  section, move, duplicate) are disabled while a filter is active.
 - List view only (not the kanban view used for one2many tables on mobile).
 - Presets cover optional columns only.
 

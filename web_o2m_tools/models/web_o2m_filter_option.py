@@ -1,5 +1,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 from odoo.tools.safe_eval import datetime, dateutil, safe_eval
 
 
@@ -43,4 +44,4 @@ class WebO2mFilterOption(models.Model):
         self.ensure_one()
         if not lines:
             return 0
-        return lines.search_count([('id', 'in', lines.ids)] + self._get_domain())
+        return lines.search_count(Domain('id', 'in', lines.ids) & Domain(self._get_domain()))

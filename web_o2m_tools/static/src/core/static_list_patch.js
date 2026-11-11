@@ -1,6 +1,13 @@
-import { StaticList } from "@web/model/relational_model/static_list";
+import { toRaw } from "@odoo/owl";
 import { x2ManyCommands } from "@web/core/orm_service";
 import { patch } from "@web/core/utils/patch";
+import { StaticList } from "@web/model/relational_model/static_list";
+
+/**
+ * Lists for which `currentIds` must temporarily return the displayed ids only
+ * (see `_applyCommands`). Kept outside the reactive list to avoid re-renders.
+ */
+const visibleOnly = new WeakSet();
 
 /**
  * Line filtering on StaticList.
@@ -17,7 +24,7 @@ import { patch } from "@web/core/utils/patch";
 patch(StaticList.prototype, {
     get currentIds() {
         const ids = super.currentIds;
-        if (!this._o2mFilter) {
+        if (!this._o2mFilter || visibleOnly.has(toRaw(this))) {
             return ids;
         }
         return [...ids, ...this._o2mFilter.hiddenIds];
@@ -106,19 +113,35 @@ patch(StaticList.prototype, {
     },
 
     _applyCommands(commands) {
-        const result = super._applyCommands(...arguments);
         if (this._o2mFilter) {
-            const { DELETE, UNLINK } = x2ManyCommands;
-            const removed = new Set(
-                commands.filter((c) => c[0] === DELETE || c[0] === UNLINK).map((c) => c[1])
-            );
-            if (removed.size) {
-                this._o2mFilter.hiddenIds = this._o2mFilter.hiddenIds.filter(
-                    (id) => !removed.has(id)
+            const { CLEAR, DELETE, LINK, SET, UNLINK } = x2ManyCommands;
+            if (commands.some((c) => c[0] === CLEAR || c[0] === SET)) {
+                // The whole relation is replaced by the given lines.
+                this._o2mFilter.hiddenIds = [];
+            } else {
+                // Removed lines are gone, (re)linked lines are displayed.
+                const changed = new Set(
+                    commands
+                        .filter((c) => [DELETE, UNLINK, LINK].includes(c[0]))
+                        .map((c) => c[1])
                 );
+                if (changed.size) {
+                    this._o2mFilter.hiddenIds = this._o2mFilter.hiddenIds.filter(
+                        (id) => !changed.has(id)
+                    );
+                }
             }
         }
-        return result;
+        // Odoo builds the next list from `this.currentIds`, which includes the
+        // hidden lines while filtering: expose the displayed ones only. It is
+        // read synchronously, before the first await.
+        const raw = toRaw(this);
+        visibleOnly.add(raw);
+        try {
+            return super._applyCommands(...arguments);
+        } finally {
+            visibleOnly.delete(raw);
+        }
     },
 
     _addSavePoint() {
@@ -142,5 +165,33 @@ patch(StaticList.prototype, {
             this._o2mFilter.sorted = true;
         }
         return super._sortBy(...arguments);
+    },
+
+    _sort(currentIds, orderBy) {
+        // Odoo sorts `this.currentIds` by default, which includes the hidden lines.
+        if (currentIds === undefined && this._o2mFilter) {
+            currentIds = this._currentIds;
+        }
+        return super._sort(currentIds, orderBy);
+    },
+
+    async _resequence() {
+        if (this._o2mFilter) {
+            // Renumbering the displayed lines only would collide with the hidden
+            // ones (e.g. a line inserted inside a section): keep the sequences.
+            return;
+        }
+        return super._resequence(...arguments);
+    },
+
+    async delete() {
+        await super.delete(...arguments);
+        // Odoo reloads the previous page when the last one becomes empty, based on
+        // `count`, which includes the hidden lines while filtering.
+        if (this._o2mFilter && !this.records.length && this.offset > 0) {
+            await this.model.mutex.exec(() =>
+                this._load({ offset: Math.max(this.offset - this.limit, 0) })
+            );
+        }
     },
 });

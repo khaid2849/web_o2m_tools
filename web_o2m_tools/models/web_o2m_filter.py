@@ -2,7 +2,7 @@ from collections import Counter
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 from .web_o2m_config import FILTER_FIELD_TYPES, _facet_key
 
@@ -127,7 +127,7 @@ class WebO2mFilter(models.Model):
             options = self.option_ids.filtered(lambda o: o.id in {int(k) for k in keys})
             if not options:
                 return None, None
-            return expression.OR([option._get_domain() for option in options]), None
+            return Domain.OR(Domain(option._get_domain()) for option in options), None
 
         field_name = self.field_id.name
         field = self.env[self.config_id.comodel]._fields[field_name]
@@ -138,9 +138,9 @@ class WebO2mFilter(models.Model):
                 values = [k for k in keys if k]
             domains = []
             if values:
-                domains.append([(field_name, 'in', values)])
+                domains.append(Domain(field_name, 'in', values))
             if False in keys:
-                domains.append([(field_name, '=', False)])
-            return expression.OR(domains), None
+                domains.append(Domain(field_name, '=', False))
+            return Domain.OR(domains), None
         key_set = set(keys)
         return None, lambda line: _facet_key(field, line[field_name]) in key_set
