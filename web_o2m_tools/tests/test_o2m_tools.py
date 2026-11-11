@@ -1,5 +1,8 @@
+from psycopg2 import IntegrityError
+
 from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tests import TransactionCase, new_test_user, tagged
+from odoo.tools import mute_logger
 
 
 @tagged('post_install', '-at_install')
@@ -25,7 +28,7 @@ class TestO2mTools(TransactionCase):
                         'country_id': cls.be.id, 'city': 'Brussels'}),
                 (0, 0, {'name': 'Bob Delivery', 'type': 'delivery', 'country_id': cls.fr.id, 'city': 'Paris'}),
                 (0, 0, {'name': 'Carol Contact', 'type': 'contact', 'email': 'carol@example.com',
-                        'is_company': True}),
+                        'employee': True}),
                 (0, 0, {'name': 'Dan Invoice', 'type': 'invoice', 'country_id': cls.be.id, 'city': 'Ghent'}),
             ],
         })
@@ -37,7 +40,7 @@ class TestO2mTools(TransactionCase):
             'filter_ids': [
                 (0, 0, {'filter_type': 'field', 'field_id': field('type').id, 'sequence': 1}),
                 (0, 0, {'filter_type': 'field', 'field_id': field('country_id').id, 'sequence': 2}),
-                (0, 0, {'filter_type': 'field', 'field_id': field('is_company').id, 'sequence': 3}),
+                (0, 0, {'filter_type': 'field', 'field_id': field('employee').id, 'sequence': 3}),
                 # non stored, non searchable compute -> evaluated in Python
                 (0, 0, {'filter_type': 'field', 'field_id': field('contact_address').id, 'sequence': 4}),
                 (0, 0, {'filter_type': 'domain', 'name': 'Email', 'sequence': 5, 'option_ids': [
@@ -46,7 +49,7 @@ class TestO2mTools(TransactionCase):
                 ]}),
             ],
         })
-        cls.f_type, cls.f_country, cls.f_company, cls.f_address, cls.f_email = cls.config.filter_ids
+        cls.f_type, cls.f_country, cls.f_employee, cls.f_address, cls.f_email = cls.config.filter_ids
 
     def _search(self, search='', filters=None, user=None):
         Config = self.env['web.o2m.config'].with_user(user or self.user)
@@ -74,8 +77,8 @@ class TestO2mTools(TransactionCase):
         self.assertEqual(self._search(filters={self.f_country.id: [self.fr.id, False]}), self.bob | self.carol)
 
     def test_filter_boolean(self):
-        self.assertEqual(self._search(filters={self.f_company.id: [True]}), self.carol)
-        self.assertEqual(self._search(filters={self.f_company.id: [False]}), self.alice | self.bob | self.dan)
+        self.assertEqual(self._search(filters={self.f_employee.id: [True]}), self.carol)
+        self.assertEqual(self._search(filters={self.f_employee.id: [False]}), self.alice | self.bob | self.dan)
 
     def test_filter_non_stored_field_in_python(self):
         address = self.alice.contact_address
@@ -107,8 +110,8 @@ class TestO2mTools(TransactionCase):
         country = by_id[self.f_country.id]['options']
         self.assertEqual([(o['key'], o['count']) for o in country], [(self.be.id, 2), (self.fr.id, 1), (False, 1)])
         self.assertEqual(country[0]['label'], self.be.display_name)
-        company = {o['key']: o['count'] for o in by_id[self.f_company.id]['options']}
-        self.assertEqual(company, {True: 1, False: 3})
+        employee = {o['key']: o['count'] for o in by_id[self.f_employee.id]['options']}
+        self.assertEqual(employee, {True: 1, False: 3})
         address = by_id[self.f_address.id]['options']
         self.assertEqual(sum(o['count'] for o in address), 4)
         email = [(o['label'], o['count']) for o in by_id[self.f_email.id]['options']]
@@ -126,6 +129,13 @@ class TestO2mTools(TransactionCase):
         self.parent.company_id = other_company
         with self.assertRaises(AccessError):
             self._search('alice')
+
+    def test_table_configured_once(self):
+        with mute_logger('odoo.sql_db'), self.assertRaises(IntegrityError):
+            self.env['web.o2m.config'].create({
+                'model_id': self.config.model_id.id,
+                'field_id': self.config.field_id.id,
+            })
 
     def test_invalid_configuration(self):
         Fields = self.env['ir.model.fields']
